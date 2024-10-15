@@ -1,5 +1,6 @@
 # Punto 9
 # Desarrollado por: Camilo Andrés Acevedo Cuevas
+
 class Temperatura:
 
   """_Summary_
@@ -11,7 +12,7 @@ class Temperatura:
       add_temperatura_ideal: Añade una temperatura ideal a la lista de temperaturas ideales.
       get_temperatura_media: Devuelve la temperatura media de un día.
       get_dia_menor_temperatura: Debuelve el día con la menor temperatura mínima.
-      get_temperatura: Devuelve la temperatura mínima de un día.
+      get_temperatura_minima: Devuelve la temperatura mínima de un día.
   """
 
   temperaturas_maximas = []
@@ -43,7 +44,7 @@ class Temperatura:
     dia_menor_temperatura = self.temperaturas_minimas.index(min(self.temperaturas_minimas)) + 1
     return dia_menor_temperatura
   
-  def get_temperatura(self, dia):
+  def get_temperatura_minima(self, dia):
     temperatura = self.temperaturas_minimas[dia - 1]
     return temperatura
 
@@ -77,10 +78,21 @@ def main():
   print("\nDías con menor temperatura:")
   for dia in range(dias):
     dia_menor_temperatura = temperatura.get_dia_menor_temperatura()
-    temp = temperatura.get_temperatura(dia_menor_temperatura)
+    temp = temperatura.get_temperatura_minima(dia_menor_temperatura)
     print(f"\nDía {dia_menor_temperatura}: {temp}°")
     temperatura.temperaturas_minimas[dia_menor_temperatura - 1] = float(1000)
 
+  # Buscar día(s) con temperatura máxima
+  print("\nIngrese la temperatura máxima a buscar:")
+  temp = float(input())
+
+  if temp in temperatura.temperaturas_maximas:
+    print("\nDía(s) con la temperatura máxima ingresada:")
+    for dia in range(dias):
+      if temp == temperatura.temperaturas_maximas[dia]:
+        print(f"Día {dia + 1}")
+  else:
+    print("\nNo hay días con la temperatura máxima ingresada.")
 
 if __name__ == "__main__":
   main()
