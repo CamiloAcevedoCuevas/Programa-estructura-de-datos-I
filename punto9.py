@@ -2,38 +2,30 @@
 # Desarrollado por: Camilo Andrés Acevedo Cuevas
 
 class Temperatura:
-
-  """_Summary_
+  """
   Esta clase permite almacenar temperaturas máximas, mínimas e ideales de varios días y realizar operaciones con ellas.
 
-  Returns:
-      add_temperatura_maxima: Añade una temperatura máxima a la lista de temperaturas máximas.
-      add_temperatura_minima: Añade una temperatura mínima a la lista de temperaturas mínimas.
-      add_temperatura_ideal: Añade una temperatura ideal a la lista de temperaturas ideales.
-      get_temperatura_media: Devuelve la temperatura media de un día.
-      get_dia_menor_temperatura: Debuelve el día con la menor temperatura mínima.
-      get_temperatura_minima: Devuelve la temperatura mínima de un día.
+  Métodos:
+      add_temperatura_maxima(temperatura_maxima): Añade una temperatura máxima a la lista de temperaturas máximas.
+      add_temperatura_minima(temperatura_minima): Añade una temperatura mínima a la lista de temperaturas mínimas.
+      add_temperatura_ideal(temperatura_ideal): Añade una temperatura ideal a la lista de temperaturas ideales.
+      get_temperatura_media(dia): Devuelve la temperatura media de un día.
+      get_dia_menor_temperatura(): Devuelve el día con la menor temperatura mínima.
+      get_temperatura_minima(dia): Devuelve la temperatura mínima de un día.
   """
-
-  temperaturas_maximas = []
-  temperaturas_minimas = []
-  temperaturas_ideales = []
   
   def __init__(self):
     self.temperaturas_maximas = []
     self.temperaturas_minimas = []
     self.temperaturas_ideales = []
 
-  def add_temperatura_maxima(self):
-    temperatura_maxima = float(input("Ingrese la temperatura máxima: "))
+  def add_temperatura_maxima(self, temperatura_maxima):
     self.temperaturas_maximas.append(temperatura_maxima)
 
-  def add_temperatura_minima(self):
-    temperatura_minima = float(input("Ingrese la temperatura mínima: "))
+  def add_temperatura_minima(self, temperatura_minima):
     self.temperaturas_minimas.append(temperatura_minima)
 
-  def add_temperatura_ideal(self):
-    temperatura_ideal = float(input("Ingrese la temperatura ideal: "))
+  def add_temperatura_ideal(self, temperatura_ideal):
     self.temperaturas_ideales.append(temperatura_ideal)
 
   def get_temperatura_media(self, dia):
@@ -57,9 +49,14 @@ def main():
   while dia != 0:
     print(f"\nDía {dia}\n")
 
-    temperatura.add_temperatura_maxima()
-    temperatura.add_temperatura_minima()
-    temperatura.add_temperatura_ideal()
+    temperatura_maxima = float(input("Ingrese la temperatura máxima: "))
+    temperatura.add_temperatura_maxima(temperatura_maxima)
+
+    temperatura_minima = float(input("Ingrese la temperatura mínima: "))
+    temperatura.add_temperatura_minima(temperatura_minima)
+    
+    temperatura_ideal = float(input("Ingrese la temperatura ideal: "))
+    temperatura.add_temperatura_ideal(temperatura_ideal)
 
     print(f"\nIngresar datos día {dia + 1} (0 = No, 1 = Sí)")
     aux = input()
