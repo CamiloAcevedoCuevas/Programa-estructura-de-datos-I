@@ -61,7 +61,7 @@ def main():
     temperatura.add_temperatura_minima()
     temperatura.add_temperatura_ideal()
 
-    print("\n¿Desea ingresar datos de otro día? (0 = No, 1 = Sí)")
+    print(f"\nIngresar datos día {dia + 1} (0 = No, 1 = Sí)")
     aux = input()
     if aux == "0":
       aux = dia
@@ -90,9 +90,9 @@ def main():
     print(f"\nDía(s) con temperatura máxima = {temperatura_maxima}°:")
     for dia in range(dias):
       if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
-        print(f"Día {dia + 1}")
+        print("Día", dia + 1)
   else:
-    print(f"\nNo hay días con temperatura máxima = {temperatura_maxima}°.")
+    print(f"\nNo hay días con esa temperatura máxima = {temperatura_maxima}°.")
 
 if __name__ == "__main__":
   main()
