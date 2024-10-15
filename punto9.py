@@ -52,6 +52,7 @@ class Temperatura:
 def main():
   temperatura = Temperatura()
 
+  # Ingresar temperaturas
   dia = 1
   while dia != 0:
     print(f"\nDía {dia}\n")
