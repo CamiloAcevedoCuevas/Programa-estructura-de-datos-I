@@ -72,14 +72,14 @@ def main():
   dias = aux
   print("\nTemperaturas medias:")
   for dia in range(dias):
-    print(f"\nDía {dia + 1}: {temperatura.get_temperatura_media(dia)}°")
+    print(f"Día {dia + 1}: {temperatura.get_temperatura_media(dia)}°")
 
   # Mostrar días con menor temperatura
   print("\nDías con menor temperatura:")
   for dia in range(dias):
     dia_menor_temperatura = temperatura.get_dia_menor_temperatura()
     temp = temperatura.get_temperatura_minima(dia_menor_temperatura)
-    print(f"\nDía {dia_menor_temperatura}: {temp}°")
+    print(f"Día {dia_menor_temperatura}: {temp}°")
     temperatura.temperaturas_minimas[dia_menor_temperatura - 1] = float(1000)
 
   # Buscar día(s) con temperatura máxima
