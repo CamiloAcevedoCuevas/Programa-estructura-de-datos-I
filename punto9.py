@@ -1,6 +1,18 @@
 # Punto 9
-
+# Desarrollado por: Camilo Andrés Acevedo Cuevas
 class Temperatura:
+
+  """_Summary_
+  Esta clase permite almacenar temperaturas máximas, mínimas e ideales de varios días y realizar operaciones con ellas.
+
+  Returns:
+      add_temperatura_maxima: Añade una temperatura máxima a la lista de temperaturas máximas.
+      add_temperatura_minima: Añade una temperatura mínima a la lista de temperaturas mínimas.
+      add_temperatura_ideal: Añade una temperatura ideal a la lista de temperaturas ideales.
+      get_temperatura_media: Devuelve la temperatura media de un día.
+      get_dia_menor_temperatura: Debuelve el día con la menor temperatura mínima.
+      get_temperatura: Devuelve la temperatura mínima de un día.
+  """
 
   temperaturas_maximas = []
   temperaturas_minimas = []
@@ -35,6 +47,7 @@ class Temperatura:
     temperatura = self.temperaturas_minimas[dia - 1]
     return temperatura
 
+# Main
 def main():
   temperatura = Temperatura()
 
@@ -54,17 +67,19 @@ def main():
     else:
       dia += 1
   
+  # Mostrar temperaturas medias
   dias = aux
   print("\nTemperaturas medias:")
   for dia in range(dias):
     print(f"\nDía {dia + 1}: {temperatura.get_temperatura_media(dia)}°")
 
-  print("\nLos días con menor temperatura fueron:")
+  # Mostrar días con menor temperatura
+  print("\nDías con menor temperatura:")
   for dia in range(dias):
     dia_menor_temperatura = temperatura.get_dia_menor_temperatura()
-    temperatura = temperatura.get_temperatura(dia_menor_temperatura)
-    print(f"\nDía {dia_menor_temperatura}: {temperatura}°")
-    temperatura.temperaturas_minimas[dia_menor_temperatura - 1] = 1000
+    temp = temperatura.get_temperatura(dia_menor_temperatura)
+    print(f"\nDía {dia_menor_temperatura}: {temp}°")
+    temperatura.temperaturas_minimas[dia_menor_temperatura - 1] = float(1000)
 
 
 if __name__ == "__main__":
