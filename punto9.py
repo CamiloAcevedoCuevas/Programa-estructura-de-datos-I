@@ -45,8 +45,8 @@ class Temperatura:
     return dia_menor_temperatura
   
   def get_temperatura_minima(self, dia):
-    temperatura = self.temperaturas_minimas[dia - 1]
-    return temperatura
+    temperatura_minima = self.temperaturas_minimas[dia - 1]
+    return temperatura_minima
 
 # Main
 def main():
@@ -78,18 +78,17 @@ def main():
   print("\nDías con menor temperatura:")
   for dia in range(dias):
     dia_menor_temperatura = temperatura.get_dia_menor_temperatura()
-    temp = temperatura.get_temperatura_minima(dia_menor_temperatura)
-    print(f"Día {dia_menor_temperatura}: {temp}°")
+    temperatura_minima = temperatura.get_temperatura_minima(dia_menor_temperatura)
+    print(f"Día {dia_menor_temperatura}: {temperatura_minima}°")
     temperatura.temperaturas_minimas[dia_menor_temperatura - 1] = float(1000)
 
   # Buscar día(s) con temperatura máxima
   print("\nIngrese la temperatura máxima a buscar:")
-  temp = float(input())
-
-  if temp in temperatura.temperaturas_maximas:
+  temperatura_maxima = float(input())
+  if temperatura_maxima in temperatura.temperaturas_maximas:
     print("\nDía(s) con la temperatura máxima ingresada:")
     for dia in range(dias):
-      if temp == temperatura.temperaturas_maximas[dia]:
+      if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
         print(f"Día {dia + 1}")
   else:
     print("\nNo hay días con la temperatura máxima ingresada.")
