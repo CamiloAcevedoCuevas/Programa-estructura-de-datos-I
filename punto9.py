@@ -86,10 +86,10 @@ def main():
     if temperatura_maxima in temperatura.temperaturas_maximas:
         print(f"\nDía(s) con temperatura máxima = {temperatura_maxima}°:")
         for dia in range(dias):
-          if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
-              print("Día", dia + 1)
+            if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
+                print("Día", dia + 1)
     else:
         print(f"\nNo hay días con esa temperatura máxima = {temperatura_maxima}°.")
 
 if __name__ == "__main__":
-  main()
+    main()
