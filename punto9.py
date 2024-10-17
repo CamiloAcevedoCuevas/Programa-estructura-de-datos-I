@@ -22,7 +22,7 @@ class Temperatura:
     def add_temperatura_maxima(self):
         while True:
             try:
-                temperatura_maxima = float(input("Ingrese la temperatura máxima: "))
+                temperatura_maxima = float(input("Ingrese la temperatura máxima:\n"))
                 self.temperaturas_maximas.append(temperatura_maxima)
             except ValueError:
                 print("Error: Ingrese un número.\n")
@@ -33,7 +33,10 @@ class Temperatura:
     def add_temperatura_minima(self):
         while True:
             try:
-                temperatura_minima = float(input("Ingrese la temperatura mínima: "))
+                temperatura_minima = float(input("Ingrese la temperatura mínima:\n"))
+                if temperatura_minima > self.temperaturas_maximas[len(self.temperaturas_maximas) - 1]:
+                    print("Error: La temperatura mínima no puede ser mayor que la temperatura máxima.\n")
+                    continue
                 self.temperaturas_minimas.append(temperatura_minima)
             except ValueError:
                 print("Error: Ingrese un número.\n")
@@ -44,7 +47,7 @@ class Temperatura:
     def add_temperatura_ideal(self):
         while True:
             try:
-                temperatura_ideal = float(input("Ingrese la temperatura ideal: "))
+                temperatura_ideal = float(input("Ingrese la temperatura ideal:\n"))
                 self.temperaturas_ideales.append(temperatura_ideal)
             except ValueError:
                 print("Error: Ingrese un número.\n")
@@ -68,23 +71,27 @@ class Temperatura:
 def main():
     temperatura = Temperatura()
 
-    # Ingresar temperaturas
     dia = 1
     while dia != 0:
         print(f"\nDía {dia}\n")
 
+        # Ingresar temperaturas
         temperatura.add_temperatura_maxima()
         temperatura.add_temperatura_minima()
         temperatura.add_temperatura_ideal()
 
-        print(f"\nIngresar datos día {dia + 1} (0 = No, 1 = Sí)")
-        aux = input()
-        if aux == "0":
-            aux = dia
-            dia = 0
-        else:
-            dia += 1
-  
+        while True:
+            aux = input(f"\nIngresar datos día {dia + 1} (0 = No, 1 = Sí)\n")
+            if aux == "0":
+                aux = dia
+                dia = 0
+                break
+            elif aux == "1":
+                dia += 1
+                break
+            else:
+                print("Error: Ingrese 0 o 1.")
+
     # Mostrar temperaturas medias
     dias = aux
     print("\nTemperaturas medias:")
@@ -95,17 +102,17 @@ def main():
     print("\nDías con menor temperatura:")
     sorted = list(temperatura.temperaturas_minimas)
     sorted.sort()
-    for dia in range(len(sorted)):
+    for dia in range(dias):
         print(f"Día--- {dia + 1}: {sorted[dia]}°")
 
     # Buscar día(s) con temperatura máxima
-    print("\nIngrese la temperatura máxima a buscar:")
+    print("\nIngrese la temperatura máxima a buscar:\n")
     temperatura_maxima = float(input())
     if temperatura_maxima in temperatura.temperaturas_maximas:
         print(f"\nDía(s) con temperatura máxima = {temperatura_maxima}°:")
         for dia in range(dias):
             if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
-                print("Día--- ", dia + 1)
+                print("Día---", dia + 1)
     else:
         print(f"\nNo hay días con temperatura máxima = {temperatura_maxima}°.")
 
