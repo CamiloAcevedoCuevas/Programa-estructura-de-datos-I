@@ -1,120 +1,138 @@
 # Punto 9
 # Desarrollado por: Camilo Andrés Acevedo Cuevas
 
-class Temperatura:
+class Dia:
+
     """
     Esta clase permite almacenar temperaturas máximas, mínimas e ideales de varios días y realizar operaciones con ellas.
 
     Métodos:
-        add_temperatura_maxima(): Valida y añade una temperatura máxima a la lista de temperaturas máximas.
-        add_temperatura_minima(): Valida y añade una temperatura mínima a la lista de temperaturas mínimas.
-        add_temperatura_ideal(): Valida y añade una temperatura ideal a la lista de temperaturas ideales.
-        get_temperatura_media(dia): Devuelve la temperatura media de un día.
-        get_dia_menor_temperatura(): Devuelve el día con la menor temperatura mínima.
-        get_temperatura_minima(dia): Devuelve la temperatura mínima de un día.
+        add_temp_max(temp_max): Añade una temperatura máxima.
+        add_temp_min(temp_min): Valida y añade una temperatura mínima.
+        add_temp_idl(temp_idl): Añade una temperatura ideal.
+        get_dia_menor_temperatura(): Retorna el día con la menor temperatura mínima.
+
+    Atributos:
+        temps_maxs: Lista de temperaturas máximas.
+        temps_mins: Lista de temperaturas mínimas.
+        temps_idls: Lista de temperaturas ideales.
+        dia: Día actual.
+        temp_max: Temperatura máxima actual.
+        temp_min: Temperatura mínima actual.
+        temp_idl: Temperatura ideal actual.
+        temp_med: Temperatura media actual.
     """
-  
+    
+    temps_maxs = []
+    temps_mins = []
+    temps_idls = []
+    
     def __init__(self):
-        self.temperaturas_maximas = []
-        self.temperaturas_minimas = []
-        self.temperaturas_ideales = []
+        self.dia = 1
+        self.temp_max = None
+        self.temp_min = None
+        self.temp_idl = None
+        self.temp_med = None
+        self.dia_men_temp = None
 
-    def add_temperatura_maxima(self):
+    def add_temp_max(self, temp_max):
+        self.temps_maxs.append(temp_max)
+
+    def add_temp_min(self, temp_min):
+        temp = Temperatura()
+        if float(temp.validar_temp(temp_min, "mínima")) > float(self.temp_max):
+            temp_min = temp.validar_temp(input(f"\nError: La temperatura mínima no puede ser mayor que la máxima.\n\nIngrese la temperatura mínima: "), "mínima")
+            self.add_temp_min(temp_min)
+        else:
+            self.temp_min = float(temp_min)
+            self.temps_mins.append(self.temp_min)
+
+    def add_temp_idl(self, temp_idl):
+        self.temps_idls.append(temp_idl)
+
+    def get_dia_men_temp(self):
+        self.dia_men_temp = self.temps_mins.index(min(self.temps_mins)) + 1
+        return self.dia_men_temp
+    
+    def get_answer(self):
         while True:
-            try:
-                temperatura_maxima = float(input("Ingrese la temperatura máxima:\n"))
-                self.temperaturas_maximas.append(temperatura_maxima)
-            except ValueError:
-                print("Error: Ingrese un número.\n")
-                continue
-            else:
-                break
-
-    def add_temperatura_minima(self):
-        while True:
-            try:
-                temperatura_minima = float(input("Ingrese la temperatura mínima:\n"))
-                if temperatura_minima > self.temperaturas_maximas[len(self.temperaturas_maximas) - 1]:
-                    print("Error: La temperatura mínima no puede ser mayor que la temperatura máxima.\n")
-                    continue
-                self.temperaturas_minimas.append(temperatura_minima)
-            except ValueError:
-                print("Error: Ingrese un número.\n")
-                continue
-            else:
-                break
-
-    def add_temperatura_ideal(self):
-        while True:
-            try:
-                temperatura_ideal = float(input("Ingrese la temperatura ideal:\n"))
-                self.temperaturas_ideales.append(temperatura_ideal)
-            except ValueError:
-                print("Error: Ingrese un número.\n")
-                continue
-            else:
-                break
-
-    def get_temperatura_media(self, dia):
-        temperatura_media = (self.temperaturas_maximas[dia] + self.temperaturas_minimas[dia]) / 2
-        return temperatura_media
-  
-    def get_dia_menor_temperatura(self):
-        dia_menor_temperatura = self.temperaturas_minimas.index(min(self.temperaturas_minimas)) + 1
-        return dia_menor_temperatura
-  
-    def get_temperatura_minima(self, dia):
-        temperatura_minima = self.temperaturas_minimas[dia - 1]
-        return temperatura_minima
-
-# Main
-def main():
-    temperatura = Temperatura()
-
-    dia = 1
-    while dia != 0:
-        print(f"\nDía {dia}\n")
-
-        # Ingresar temperaturas
-        temperatura.add_temperatura_maxima()
-        temperatura.add_temperatura_minima()
-        temperatura.add_temperatura_ideal()
-
-        while True:
-            aux = input(f"\nIngresar datos día {dia + 1} (0 = No, 1 = Sí)\n")
+            aux = input(f"\nIngresar datos día {self.dia + 1} (0 = No, 1 = Sí): ")
             if aux == "0":
-                aux = dia
-                dia = 0
-                break
+                dias = self.dia
+                self.dia = 0
+                return dias
             elif aux == "1":
-                dia += 1
+                self.dia += 1
                 break
             else:
                 print("Error: Ingrese 0 o 1.")
+    
+class Temperatura:
+
+    """
+    Esta clase permite validar y almacenar temperaturas y realizar operaciones con ellas.
+
+    Métodos:
+        get_val_temp(temp, str): Valida y retorna una temperatura.
+        get_temp_med(dia): Retorna la temperatura media de un día.
+        
+    """
+    
+    def __init__(self):
+        pass
+    
+    def validar_temp(self, temp, str):
+        while True:
+            try:
+                isinstance(float(temp), float)
+                return float(temp)
+            except ValueError:
+                temp = input(f"\nError: Ingrese un número.\n\nIngrese la temperatura {str}: ")
+                continue
+    
+    def get_temp_med(self, d):
+        dia = Dia()
+        dia.temp_med = (dia.temps_maxs[d] + dia.temps_mins[d]) / 2
+        return dia.temp_med
+    
+    
+def main():
+    dia = Dia()
+    temp = Temperatura()
+    
+    # Ingresar temperaturas
+    while dia.dia != 0:
+        print("\nDía---", dia.dia)
+        dia.temp_max = temp.validar_temp(input("\nIngrese la temperatura máxima: "), "máxima")
+        dia.add_temp_max(dia.temp_max)
+        dia.temp_min = temp.validar_temp(input("\nIngrese la temperatura mínima: "), "mínima")
+        dia.add_temp_min(dia.temp_min)
+        dia.temp_idl = temp.validar_temp(input("\nIngrese la temperatura ideal: "), "ideal")
+        dia.add_temp_idl(dia.temp_idl)
+        dias = dia.get_answer()
 
     # Mostrar temperaturas medias
-    dias = aux
-    print("\nTemperaturas medias:")
-    for dia in range(dias):
-        print(f"Día--- {dia + 1}: {temperatura.get_temperatura_media(dia)}°")
+    print("\nTemperaturas medias:\n")
+    for d in range(dias):
+        dia.temp_med = temp.get_temp_med(d)
+        print(f"Día--- {d + 1}: {dia.temp_med}°\n")
 
     # Mostrar días con menor temperatura
-    print("\nDías con menor temperatura:")
-    sorted = list(temperatura.temperaturas_minimas)
+    print("Días con menor temperatura:\n")
+    sorted = list(dia.temps_mins)
     sorted.sort()
-    for dia in range(dias):
-        print(f"Día--- {dia + 1}: {sorted[dia]}°")
+    for d in range(dias):
+        print(f"Día--- {d + 1}: {sorted[d]}°\n")
 
     # Buscar día(s) con temperatura máxima
-    print("\nIngrese la temperatura máxima a buscar:\n")
-    temperatura_maxima = float(input())
-    if temperatura_maxima in temperatura.temperaturas_maximas:
-        print(f"\nDía(s) con temperatura máxima = {temperatura_maxima}°:")
-        for dia in range(dias):
-            if temperatura_maxima == temperatura.temperaturas_maximas[dia]:
-                print("Día---", dia + 1)
+    dia.temp_max = temp.validar_temp(input("Ingrese la temperatura máxima a buscar: "), "máxima a buscar")
+    if float(dia.temp_max) in dia.temps_maxs:
+        print(f"\nDía(s) con temperatura máxima = {dia.temp_max}°:\n")
+        for d in range(dias):
+            if float(dia.temp_max) == dia.temps_maxs[d]:
+                print(f"Día--- {d + 1}\n")
     else:
-        print(f"\nNo hay días con temperatura máxima = {temperatura_maxima}°.")
+        print(f"\nNo hay días con temperatura máxima = {dia.temp_max}°.\n")
 
 if __name__ == "__main__":
     main()
