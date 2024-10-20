@@ -13,7 +13,6 @@
 # █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
 class Dia:
-
     """
     Esta clase permite almacenar temperaturas máximas, mínimas e ideales de varios días.
 
@@ -33,7 +32,6 @@ class Dia:
         temp_idl: Temperatura ideal actual.
         temp_med: Temperatura media actual.
     """
-    
     temps_maxs = []
     temps_mins = []
     temps_idls = []
@@ -74,7 +72,6 @@ class Dia:
                 print("Error: Ingrese 0 o 1.")
     
 class Temperatura:
-
     """
     Esta clase permite validar temperaturas y almacenar temperaturas medias.
 
@@ -83,7 +80,6 @@ class Temperatura:
         get_temp_med(dia): Retorna la temperatura media de un día.
         
     """
-    
     def __init__(self):
         pass
     
