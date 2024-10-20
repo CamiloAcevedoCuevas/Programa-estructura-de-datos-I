@@ -65,7 +65,7 @@ class Dia:
 class Temperatura:
 
     """
-    Esta clase permite validar y almacenar temperaturas y realizar operaciones con ellas.
+    Esta clase permite validar temperaturas y almacenar temperaturas medias.
 
     Métodos:
         get_val_temp(temp, str): Valida y retorna una temperatura.
@@ -122,10 +122,10 @@ def main():
     # Buscar día(s) con temperatura máxima
     temp_max = temp.validar_temp(input("_________________________________________________\n\nIngrese la temperatura máxima a buscar: "), "máxima a buscar")
     if float(temp_max) in dia.temps_maxs:
-        print(f"_________________________________________________\n\nDía(s) con temperatura máxima = {temp_max}°:")
+        print(f"_________________________________________________\n\nDía(s) con temperatura máxima = {temp_max}°:\n")
         for d in range(dias):
             if float(temp_max) == dia.temps_maxs[d]:
-                print(f"\nDía--- {d + 1}")
+                print(f"Día--- {d + 1}\n")
     else:
         print(f"_________________________________________________\n\nNo hay días con temperatura máxima = {temp_max}°.\n")
 
