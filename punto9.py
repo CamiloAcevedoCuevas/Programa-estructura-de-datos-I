@@ -77,7 +77,7 @@ class Temperatura:
 
     Métodos:
         get_val_temp(temp, str): Valida y retorna una temperatura.
-        get_temp_med(dia): Retorna la temperatura media de un día.
+        get_temp_med(d): Retorna la temperatura media de un día.
         
     """
     def __init__(self):
