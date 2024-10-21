@@ -85,7 +85,6 @@ class Dia:
             self.dia += 1
             return self.get_dia_men_temp(temp)
 
-    
 class Temperatura:
     """
     Esta clase permite validar temperaturas y conseguir temperaturas medias.
