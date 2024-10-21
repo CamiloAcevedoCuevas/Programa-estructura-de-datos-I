@@ -17,10 +17,10 @@ class Dia:
     Esta clase permite almacenar temperaturas máximas, mínimas, ideales y medias de varios días.
 
     Métodos:
-        add_temp_max(temp_max): Añade una temperatura máxima.
+        add_temp_max(temp): Añade una temperatura máxima.
         add_temp_min(temp_min): Valida y añade una temperatura mínima.
-        add_temp_idl(temp_idl): Añade una temperatura ideal.
-        add_temp_med(temp_med): Añade una temperatura media
+        add_temp_idl(temp): Añade una temperatura ideal.
+        add_temp_med(temp): Añade una temperatura media
         set_dia(): Pregunta si se desea ingresar datos de un nuevo día.
 
     Atributos:
@@ -48,8 +48,8 @@ class Dia:
         self.temp_idl = None
         self.temp_med = None
 
-    def add_temp_max(self, temp_max):
-        self.temps_maxs.append(temp_max)
+    def add_temp_max(self, temp):
+        self.temps_maxs.append(temp)
 
     def add_temp_min(self, temp_min):
         temp = Temperatura()
@@ -60,11 +60,11 @@ class Dia:
             self.temp_min = float(temp_min)
             self.temps_mins.append(self.temp_min)
 
-    def add_temp_idl(self, temp_idl):
-        self.temps_idls.append(temp_idl)
+    def add_temp_idl(self, temp):
+        self.temps_idls.append(temp)
 
-    def add_temp_med(self, temp_med):
-        self.temps_meds.append(temp_med)
+    def add_temp_med(self, temp):
+        self.temps_meds.append(temp)
 
     def set_dia(self):
         aux = input(f"\nIngresar datos día {self.dia + 1} ¿(0 = No, 1 = Sí)?: ")
@@ -82,7 +82,7 @@ class Temperatura:
     Esta clase permite validar temperaturas y conseguir temperaturas medias.
 
     Métodos:
-        get_val_temp(temp, str): Valida y retorna una temperatura.
+        validar_temp(temp, str): Valida y retorna una temperatura.
         get_temp_med(d): Retorna la temperatura media de un día.
         
     """
