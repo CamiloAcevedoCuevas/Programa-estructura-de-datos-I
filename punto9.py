@@ -119,7 +119,6 @@ def main():
         dia.add_temp_max(dia.temp_max)
         dia.temp_min = temp.validar_temp(input("\nIngrese la temperatura mínima: "), "mínima")
         dia.add_temp_min(dia.temp_min)
-        dia.add_temp_med(temp.get_temp_med(dia.dia - 1))
         dia.temp_idl = temp.validar_temp(input("\nIngrese la temperatura ideal: "), "ideal")
         dia.add_temp_idl(dia.temp_idl)
         dias = dia.get_dias()
@@ -127,6 +126,7 @@ def main():
     # Mostrar temperaturas medias
     print("_________________________________________________\n\nTemperaturas medias:\n")
     for d in range(dias):
+        dia.add_temp_med(temp.get_temp_med(d))
         print(f"Día--- {d + 1}: {dia.temps_meds[d]}°\n")
 
     # Mostrar días con menor temperatura
