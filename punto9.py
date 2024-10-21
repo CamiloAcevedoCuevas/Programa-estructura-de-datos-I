@@ -21,8 +21,7 @@ class Dia:
         add_temp_min(temp_min): Valida y añade una temperatura mínima.
         add_temp_idl(temp_idl): Añade una temperatura ideal.
         add_temp_med(temp_med): Añade una temperatura media
-        get_dias(): Retorna la cantidad de días ingresados.
-        set_dia(): Establece el dia en cero.
+        set_dia(): Pregunta si se desea ingresar datos de un nuevo día.
 
     Atributos:
         temps_maxs: Lista de temperaturas máximas.
@@ -30,6 +29,7 @@ class Dia:
         temps_idls: Lista de temperaturas ideales.
         temps_meds: Lista de temperaturas medias.
         dia: Día actual.
+        num_dias: Número de días ingresados.
         temp_max: Temperatura máxima actual.
         temp_min: Temperatura mínima actual.
         temp_idl: Temperatura ideal actual.
@@ -42,6 +42,7 @@ class Dia:
     
     def __init__(self):
         self.dia = 1
+        self.num_dias = 1
         self.temp_max = None
         self.temp_min = None
         self.temp_idl = None
@@ -65,21 +66,16 @@ class Dia:
     def add_temp_med(self, temp_med):
         self.temps_meds.append(temp_med)
 
-    def get_dias(self):
-        while True:
-            aux = input(f"\nIngresar datos día {self.dia + 1} ¿(0 = No, 1 = Sí)?: ")
-            if aux == "0":
-                dias = self.dia
-                self.set_dia()
-                return dias
-            elif aux == "1":
-                self.dia += 1
-                break
-            else:
-                print("Error: Ingrese 0 o 1.")
-
     def set_dia(self):
-        self.dia = 0
+        aux = input(f"\nIngresar datos día {self.dia + 1} ¿(0 = No, 1 = Sí)?: ")
+        if aux == "0":
+            self.dia = 0
+        elif aux == "1":
+            self.dia += 1
+            self.num_dias += 1
+        else:
+            print("\nError: Ingrese 0 o 1.")
+            self.set_dia()
     
 class Temperatura:
     """
@@ -121,11 +117,11 @@ def main():
         dia.add_temp_min(dia.temp_min)
         dia.temp_idl = temp.validar_temp(input("\nIngrese la temperatura ideal: "), "ideal")
         dia.add_temp_idl(dia.temp_idl)
-        dias = dia.get_dias()
+        dia.set_dia()
 
     # Mostrar temperaturas medias
     print("_________________________________________________\n\nTemperaturas medias:\n")
-    for d in range(dias):
+    for d in range(dia.num_dias):
         dia.add_temp_med(temp.get_temp_med(d))
         print(f"Día--- {d + 1}: {dia.temps_meds[d]}°\n")
 
@@ -133,14 +129,14 @@ def main():
     print("_________________________________________________\n\nDías con menor temperatura:\n")
     sorted = list(dia.temps_mins)
     sorted.sort()
-    for d in range(dias):
+    for d in range(dia.num_dias):
         print(f"Día--- {d + 1}: {sorted[d]}°\n")
 
     # Buscar día(s) con temperatura máxima
     dia.temp_max = temp.validar_temp(input("_________________________________________________\n\nIngrese la temperatura máxima a buscar: "), "máxima a buscar")
     if float(dia.temp_max) in dia.temps_maxs:
         print(f"_________________________________________________\n\nDía(s) con temperatura máxima = {dia.temp_max}°:\n")
-        for d in range(dias):
+        for d in range(dia.num_dias):
             if float(dia.temp_max) == dia.temps_maxs[d]:
                 print(f"Día--- {d + 1}\n")
     else:
