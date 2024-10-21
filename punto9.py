@@ -22,6 +22,7 @@ class Dia:
         add_temp_idl(temp): Añade una temperatura ideal.
         add_temp_med(temp): Añade una temperatura media
         set_dia(): Pregunta si se desea ingresar datos de un nuevo día.
+        get_dia_men_temp(temp): Retorna el día con la menor temperatura ingresada.
 
     Atributos:
         temps_maxs: Lista de temperaturas máximas.
@@ -76,6 +77,14 @@ class Dia:
         else:
             print("\nError: Ingrese 0 o 1.")
             self.set_dia()
+
+    def get_dia_men_temp(self, temp):
+        if temp == self.temps_mins[self.dia]:
+            return self.dia + 1
+        else:
+            self.dia += 1
+            return self.get_dia_men_temp(temp)
+
     
 class Temperatura:
     """
@@ -90,14 +99,12 @@ class Temperatura:
         pass
     
     def validar_temp(self, temp, str):
-        while True:
-            try:
-                isinstance(float(temp), float)
-                return float(temp)
-            except ValueError:
-                temp = input(f"\nError: Ingrese un número.\n\nIngrese la temperatura {str}: ")
-                continue
-    
+        try:
+            isinstance(float(temp), float)
+            return float(temp)
+        except ValueError:
+            return self.validar_temp(input(f"\nError: Ingrese un número.\n\nIngrese la temperatura {str}: "), str)
+        
     def get_temp_med(self, d):
         dia = Dia()
         dia.temp_med = (dia.temps_maxs[d] + dia.temps_mins[d]) / 2
@@ -129,8 +136,10 @@ def main():
     print("_________________________________________________\n\nDías con menor temperatura:\n")
     sorted = list(dia.temps_mins)
     sorted.sort()
-    for d in range(dia.num_dias):
-        print(f"Día--- {d + 1}: {sorted[d]}°\n")
+    for i in range(dia.num_dias):
+        dia.dia = dia.get_dia_men_temp(sorted[i])
+        print(f"Día--- {dia.dia}: {sorted[i]}°\n")
+        dia.dia = 0
 
     # Buscar día(s) con temperatura máxima
     dia.temp_max = temp.validar_temp(input("_________________________________________________\n\nIngrese la temperatura máxima a buscar: "), "máxima a buscar")
