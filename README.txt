@@ -1,4 +1,3 @@
-El programa está diseñado para:
 Queremos guardar la temperatura mínima, máxima e ideal de los días a partir del
  1 (terminar el programa cuando sea el día 0). Realiza un programa que de la
  siguiente información:
