@@ -1,46 +1,11 @@
-# Punto 9
-# Desarrollado por: Camilo Andrés Acevedo Cuevas
-
-#    ▄▀▀▀▄▄▄▄▄▄▄▀▀▀▄   
-#    █▒▒░░░░░░░░░▒▒█   
-#     █░░█░░░░░█░░█    
-#  ▄▄  █░░░▀█▀░░░█  ▄▄ 
-# █░░█ ▀▄░░░░░░░▄▀ █░░█
-# █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-# █░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█
-# █░░║║║╠─║─║─║║║║║╠─░░█
-# █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█
-# █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
-
 class Dia:
-    """
-    Esta clase permite almacenar temperaturas máximas, mínimas, ideales y medias de varios días.
+    """Esta clase permite almacenar temperaturas máximas, mínimas, ideales y medias de varios días."""
 
-    Métodos:
-        add_temp_max(temp): Añade una temperatura máxima.
-        add_temp_min(temp_min): Valida y añade una temperatura mínima.
-        add_temp_idl(temp): Añade una temperatura ideal.
-        add_temp_med(temp): Añade una temperatura media
-        set_dia(): Pregunta si se desea ingresar datos de un nuevo día.
-        get_dia_men_temp(temp): Retorna el día con la menor temperatura ingresada.
-
-    Atributos:
-        temps_maxs: Lista de temperaturas máximas.
-        temps_mins: Lista de temperaturas mínimas.
-        temps_idls: Lista de temperaturas ideales.
-        temps_meds: Lista de temperaturas medias.
-        dia: Día actual.
-        num_dias: Número de días ingresados.
-        temp_max: Temperatura máxima actual.
-        temp_min: Temperatura mínima actual.
-        temp_idl: Temperatura ideal actual.
-        temp_med: Temperatura media actual.
-    """
     temps_maxs = []
     temps_mins = []
     temps_idls = []
     temps_meds = []
-    
+
     def __init__(self):
         self.dia = 1
         self.num_dias = 1
@@ -50,9 +15,19 @@ class Dia:
         self.temp_med = None
 
     def add_temp_max(self, temp):
+        """Añade una temperatura máxima.
+
+        Args:
+            temp (float): Temperatura máxima a añadir.
+        """
         self.temps_maxs.append(temp)
 
     def add_temp_min(self, temp_min):
+        """ Valida y añade una temperatura mínima.
+
+        Args:
+            temp_min (float): Temperatura mínima a añadir.
+        """
         temp = Temperatura()
         if float(temp.validar_temp(temp_min, "mínima")) > float(self.temp_max):
             temp_min = temp.validar_temp(input(f"\nError: La temperatura mínima no puede ser mayor que la máxima.\n\nIngrese la temperatura mínima: "), "mínima")
@@ -62,12 +37,15 @@ class Dia:
             self.temps_mins.append(self.temp_min)
 
     def add_temp_idl(self, temp):
+        """Añade una temperatura ideal."""
         self.temps_idls.append(temp)
 
     def add_temp_med(self, temp):
+        """Añade una temperatura media."""
         self.temps_meds.append(temp)
 
     def set_dia(self):
+        """Pregunta si se desea ingresar datos de un nuevo día."""
         aux = input(f"\nIngresar datos día {self.dia + 1} ¿(0 = No, 1 = Sí)?: ")
         if aux == "0":
             self.dia = 0
@@ -79,6 +57,7 @@ class Dia:
             self.set_dia()
 
     def get_dia_men_temp(self, temp):
+        """Retorna el día con la menor temperatura ingresada."""
         if temp == self.temps_mins[self.dia]:
             return self.dia + 1
         else:
@@ -87,18 +66,20 @@ class Dia:
 
     
 class Temperatura:
-    """
-    Esta clase permite validar temperaturas y conseguir temperaturas medias.
-
-    Métodos:
-        validar_temp(temp, str): Valida y retorna una temperatura.
-        get_temp_med(d): Retorna la temperatura media de un día.
-        
-    """
+    """Esta clase permite validar temperaturas y conseguir temperaturas medias."""
     def __init__(self):
         pass
     
     def validar_temp(self, temp, str):
+        """Valida y retorna una temperatura.
+
+        Args:
+            temp (float): Temperatura a validar.
+            str (str): Cadena que indica el tipo de temperatura.
+
+        Returns:
+            temp: Temperatura validada.
+        """
         try:
             isinstance(float(temp), float)
             return float(temp)
@@ -106,6 +87,14 @@ class Temperatura:
             return self.validar_temp(input(f"\nError: Ingrese un número.\n\nIngrese la temperatura {str}: "), str)
         
     def get_temp_med(self, d):
+        """Retorna la temperatura media de un día.
+
+        Args:
+            d (int): Día del que se desea obtener la temperatura media.
+
+        Returns:
+            dia.temp_med: Día con la temperatura media.
+        """
         dia = Dia()
         dia.temp_med = (dia.temps_maxs[d] + dia.temps_mins[d]) / 2
         return dia.temp_med
