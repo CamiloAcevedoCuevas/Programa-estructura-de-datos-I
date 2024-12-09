@@ -5,7 +5,7 @@ class Dia:
     temps_mins = []
     temps_idls = []
     temps_meds = []
-#hola
+    
     def __init__(self):
         self.dia = 1
         self.num_dias = 1
