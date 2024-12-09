@@ -1,6 +1,6 @@
 class Dia:
     """Esta clase permite almacenar temperaturas máximas, mínimas, ideales y medias de varios días."""
-
+#hola
     temps_maxs = []
     temps_mins = []
     temps_idls = []
